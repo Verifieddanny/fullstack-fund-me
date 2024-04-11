@@ -10,14 +10,17 @@ withdrawButton.onclick = withdraw
 fundButton.onclick = fund
 balanceButton.onclick = getBalance
 
-async function connect() {
+async function connect(e) {
+  e.preventDefault()
+
   if (typeof window.ethereum !== "undefined") {
     try {
       await ethereum.request({ method: "eth_requestAccounts" })
     } catch (error) {
       console.log(error)
     }
-    connectButton.innerHTML = "Connected"
+    // connectButton.innerHTML = "Connected"
+    connectButton.style.display = "none"
     const accounts = await ethereum.request({ method: "eth_accounts" })
     console.log(accounts)
   } else {
@@ -25,11 +28,12 @@ async function connect() {
   }
 }
 
-async function withdraw() {
+async function withdraw(e) {
+  e.preventDefault()
   console.log(`Withdrawing...`)
   if (typeof window.ethereum !== "undefined") {
     const provider = new ethers.providers.Web3Provider(window.ethereum)
-    await provider.send('eth_requestAccounts', [])
+    await provider.send("eth_requestAccounts", [])
     const signer = provider.getSigner()
     const contract = new ethers.Contract(contractAddress, abi, signer)
     try {
@@ -44,15 +48,19 @@ async function withdraw() {
   }
 }
 
-async function fund() {
+async function fund(e) {
+  e.preventDefault()
   const ethAmount = document.getElementById("ethAmount").value
   console.log(`Funding with ${ethAmount}...`)
   if (typeof window.ethereum !== "undefined") {
+    //get RPC URL from metamask
     const provider = new ethers.providers.Web3Provider(window.ethereum)
+    //account perform function
     const signer = provider.getSigner()
     const contract = new ethers.Contract(contractAddress, abi, signer)
     try {
       const transactionResponse = await contract.fund({
+        //converts ether to wei
         value: ethers.utils.parseEther(ethAmount),
       })
       await listenForTransactionMine(transactionResponse, provider)
@@ -64,7 +72,8 @@ async function fund() {
   }
 }
 
-async function getBalance() {
+async function getBalance(e) {
+  e.preventDefault()
   if (typeof window.ethereum !== "undefined") {
     const provider = new ethers.providers.Web3Provider(window.ethereum)
     try {

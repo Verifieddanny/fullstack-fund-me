@@ -2,17 +2,32 @@
 <html>
   <head>
     <title>Fund Me App</title>
+
+    <link rel="stylesheet" type="text/css" href="./srtle.css" />
   </head>
 
   <body>
-    <button id="connectButton">Connect</button>
-    <button id="balanceButton">getBalance</button>
-    <button id="withdrawButton">Withdraw</button>
-    <!-- <form> -->
-    <label for="ethAmount">ETH Amount</label>
-    <input id="ethAmount" placeholder="0.1" />
-    <button type="button" id="fundButton" > Fund </button>
-    <!-- </form> -->
+    <div class="row">
+      <div class="col-md-12">
+        <form>
+          <h1>Connect Wallet</h1>
+          <img
+            src="https://imgs.search.brave.com/39t9BaaVptiGj6W6WkMBp2t5kYzfOJu_xZCRYjC81dA/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9saDMu/Z29vZ2xldXNlcmNv/bnRlbnQuY29tL1FX/MGdaM3l1Z3pYRHZU/QU5hNS1jYzFFcGFi/UTJNR25sNmVuVzEx/TzZrSWVyRWFCUUdP/aGd5VU92aFJlZG5k/RDlpbzhSSk1tSlpm/SVhxMXJNeFVzRkhT/MlR0dz1zNjA"
+            class="meta"
+          />
+
+          <fieldset>
+            <label for="ethAmount">ETH Amount</label>
+            <input id="ethAmount" placeholder="0.1" />
+            <button type="button" id="fundButton">Fund</button>
+          </fieldset>
+
+          <button id="connectButton">Connect</button>
+          <button id="balanceButton">getBalance</button>
+          <button id="withdrawButton">Withdraw</button>
+        </form>
+      </div>
+    </div>
   </body>
 
   <script src="./index.js" type="module"></script>
